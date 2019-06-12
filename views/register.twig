@@ -1,0 +1,126 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+  <form class="form-signin">
+
+        <h2>Register</h2><hr>
+        
+        {# <div class="form-label-group">
+            <input type="text" name="seria" class="form-control" placeholder="Seria" required>
+            <label>Seria</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="nr" class="form-control" placeholder="Nr" required>
+            <label>Nr</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="cnp" class="form-control" placeholder="CNP" required>
+            <label>CNP</label>
+        </div> #}
+
+        <div class="form-label-group">
+            <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
+            <label>Email</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="firstName" class="form-control" placeholder="First Name" required>
+            <label>First Name</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="lastName" class="form-control" placeholder="Last Name" required>
+            <label>Last Name</label>
+        </div>
+
+        {# <div class="form-label-group">
+            <input type="text" name="sex" class="form-control" placeholder="Sex" required>
+            <label>Sex</label>
+        </div> #}
+
+        <div class="form-label-group">
+            <input type="date" name="dob" class="form-control" placeholder="Date of Birth" required>
+            <label>Date of Birth</label>
+        </div>
+
+        <div id="locationField" class="form-label-group">
+            <input id="autocomplete"
+                class="form-control"
+                placeholder="Address"
+                type="text"/>
+            <label>Address</label>
+        </div>
+
+        <div class="form-label-group" style="width: 70%; display: inline-block">
+            <input type="text" name="street" id="route" class="form-control" placeholder="Street" required disabled>
+            <label>Street</label>
+        </div>
+
+        <div class="form-label-group" style="width: 28%; display: inline-block">
+            <input type="text" name="streetNumber" id="street_number" class="form-control" placeholder="No." required disabled>
+            <label>No.</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="city" id="locality" class="form-control" placeholder="Street" required disabled>
+            <label>City</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="state" id="administrative_area_level_1" class="form-control" placeholder="Street" required disabled>
+            <label>State</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="country" id="country" class="form-control" placeholder="Street" required disabled>
+            <label>Country</label>
+        </div>
+
+        {# <div class="form-label-group">
+            <input type="text" id="valabilitate" class="form-control" placeholder="Valabilitate" required>
+            <label>Valabilitate</label>
+        </div> #}
+
+        <div class="form-label-group">
+            <button class="btn btn-lg btn-secondary btn-block" id="upload_id" type="submit">Upload national ID</button>
+        </div>
+
+        <div class="form-label-group">
+            <button class="btn btn-lg btn-secondary btn-block" id="upload_selfie" type="submit">Upload selfie</button>
+        </div>
+
+        <br>
+
+        <button id="submit_btn" class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 50px;">Send</button>
+
+    </form>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <video id="user_cam" autoplay playsinline></video>
+                    <video id="environment_cam" autoplay playsinline></video>
+                    {# <a href="#" id="capture_btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            width="50" height="50"
+                            viewBox="0 0 192 192"
+                            style=" fill:#000000;"><g transform=""><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,192v-192h192v192z" fill="none"></path><path d="M0,96c0,-53.01934 42.98066,-96 96,-96c53.01934,0 96,42.98066 96,96c0,53.01934 -42.98066,96 -96,96c-53.01934,0 -96,-42.98066 -96,-96zM96,176.64c44.53624,0 80.64,-36.10376 80.64,-80.64c0,-44.53624 -36.10376,-80.64 -80.64,-80.64c-44.53624,0 -80.64,36.10376 -80.64,80.64c0,44.53624 36.10376,80.64 80.64,80.64z" fill="#ffffff"></path><g fill="#ffffff"><path d="M96,166.656c-38.96218,0 -70.656,-31.6969 -70.656,-70.656c0,-38.9591 31.69382,-70.656 70.656,-70.656c38.96218,0 70.656,31.6969 70.656,70.656c0,38.9591 -31.69382,70.656 -70.656,70.656z"></path></g><path d="" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,188.16c-50.89856,0 -92.16,-41.26144 -92.16,-92.16v0c0,-50.89856 41.26144,-92.16 92.16,-92.16v0c50.89856,0 92.16,41.26144 92.16,92.16v0c0,50.89856 -41.26144,92.16 -92.16,92.16z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,184.32c-48.77779,0 -88.32,-39.54221 -88.32,-88.32v0c0,-48.77779 39.54221,-88.32 88.32,-88.32v0c48.77779,0 88.32,39.54221 88.32,88.32v0c0,48.77779 -39.54221,88.32 -88.32,88.32z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64h0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,172.8c-42.41547,0 -76.8,-34.38453 -76.8,-76.8v0c0,-42.41547 34.38453,-76.8 76.8,-76.8h0c42.41547,0 76.8,34.38453 76.8,76.8v0c0,42.41547 -34.38453,76.8 -76.8,76.8z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64h0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,180.48c-46.65702,0 -84.48,-37.82298 -84.48,-84.48v0c0,-46.65702 37.82298,-84.48 84.48,-84.48h0c46.65702,0 84.48,37.82298 84.48,84.48v0c0,46.65702 -37.82298,84.48 -84.48,84.48z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,184.32c-48.77779,0 -88.32,-39.54221 -88.32,-88.32v0c0,-48.77779 39.54221,-88.32 88.32,-88.32v0c48.77779,0 88.32,39.54221 88.32,88.32v0c0,48.77779 -39.54221,88.32 -88.32,88.32z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,180.48c-46.65702,0 -84.48,-37.82298 -84.48,-84.48v0c0,-46.65702 37.82298,-84.48 84.48,-84.48h0c46.65702,0 84.48,37.82298 84.48,84.48v0c0,46.65702 -37.82298,84.48 -84.48,84.48z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64h0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96v0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64h0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96h0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64v0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96h0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64v0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96h0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64v0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path><path d="M96,192c-53.01934,0 -96,-42.98066 -96,-96v0c0,-53.01934 42.98066,-96 96,-96h0c53.01934,0 96,42.98066 96,96v0c0,53.01934 -42.98066,96 -96,96z" fill="none"></path><path d="M96,176.64c-44.53624,0 -80.64,-36.10376 -80.64,-80.64v0c0,-44.53624 36.10376,-80.64 80.64,-80.64v0c44.53624,0 80.64,36.10376 80.64,80.64v0c0,44.53624 -36.10376,80.64 -80.64,80.64z" fill="none"></path></g></g></svg>
+                    </a> #}
+                    <div class="id-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extrascripts %}
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzsE0mwwOWZvXlWmrSJQt27Ej-fkr15tI&libraries=places"></script>
+    <script src="/javascripts/places.js"></script>
+
+{% endblock %}

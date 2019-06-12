@@ -1,0 +1,25 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <div class="container" style="margin-top: 50px;">
+        <h1 style="margin-bottom: 50px;">Dashboard</h1>
+        <div class="balance">
+            <div class="balance-header">
+                <span>Account balance</span>
+            </div>
+            <div class="dashboard-panel">
+                <p>EUR account: 0 EUR</p>
+                <p>USD account: $0</p>
+            </div>
+            <div class="cards-header">
+                <span>Cards</span>
+                <a href="#" style="float: right; color: white;">+</a>
+            </div>
+            <div class="dashboard-panel">
+                <p>You have no cards attached to your account. <a href="#">Create a new one here.</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

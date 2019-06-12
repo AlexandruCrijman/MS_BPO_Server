@@ -1,0 +1,107 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+  
+    <div class="row">
+        <div class="col-sm-4">
+            <form class="form-signin">
+
+                {# <div class="form-label-group">
+                    <input type="text" name="seria" class="form-control" placeholder="Seria" required>
+                    <label>Seria</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="nr" class="form-control" placeholder="Nr" required>
+                    <label>Nr</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="cnp" class="form-control" placeholder="CNP" required>
+                    <label>CNP</label>
+                </div> #}
+
+                <div class="form-label-group">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required value="{{user.email}}">
+                    <label>Email</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name" required value="{{user.firstName}}">
+                    <label>First Name</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" required value="{{user.lastName}}">
+                    <label>Last Name</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="date" name="dob" class="form-control" placeholder="Date of Birth" required value="{{user.dob}}">
+                    <label>Date of Birth</label>
+                </div>
+
+                <div class="form-label-group" style="width: 70%; display: inline-block">
+                    <input type="text" name="street" id="route" class="form-control" placeholder="Street" required value="{{user.street}}">
+                    <label>Street</label>
+                </div>
+
+                <div class="form-label-group" style="width: 28%; display: inline-block">
+                    <input type="text" name="streetNumber" id="street_number" class="form-control" placeholder="No." required value="{{user.streetNumber}}">
+                    <label>No.</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="city" id="locality" class="form-control" placeholder="City" required value="{{user.city}}">
+                    <label>City</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="state" id="administrative_area_level_1" class="form-control" placeholder="State" required value="{{user.state}}">
+                    <label>State</label>
+                </div>
+
+                <div class="form-label-group">
+                    <input type="text" name="country" id="country" class="form-control" placeholder="Country" required value="{{user.country}}">
+                    <label>Country</label>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="selfie-preview">
+                        <img src="/accounts/{{user.email}}/selfie.jpg">
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="id-preview">
+                        <img src="/accounts/{{user.email}}/id.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="approval-buttons">
+                        <button onclick="approve(true)" class="btn btn-lg btn-success">Approve</button>
+                        <button onclick="approve(false)" class="btn btn-lg btn-danger">Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extrascripts %}
+
+    <script>
+
+        function approve(yes) {
+            $.post("/api/users/" + (yes ? "" : "de") + "activate/{{user.email}}");
+        }
+        
+    </script>
+
+{% endblock %}

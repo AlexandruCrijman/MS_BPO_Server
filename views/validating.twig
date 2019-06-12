@@ -1,0 +1,45 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+
+    <div class="register-container">
+        <div class="form-signin">
+            <div class="text-center mb-6">
+                <h1 class="h3 mb-3 font-weight-normal">Validating</h1>
+                <p>Your bank account is currently being validated. This usually takes a couple of minutes.</p>
+                <p>The page will auto-refresh and after your account will be validated you will be taken to your personal dashboard.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extrascripts %}
+
+    <script>
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+
+        setTimeout(function () {
+            window.location = "/validating";
+        }, 5000);
+
+        const email = getCookie("email");
+
+        if (email != undefined) {
+            $.get(window.location.origin + "/api/users/" + email, function(data) {
+                console.log(data);
+                if (data.user != undefined && data.user.active == true) {
+                    window.location.href = "/success";
+                } else if (data.user != undefined && data.user.active == false) {
+                    window.location.href = "/fail";
+                }
+            });
+        }
+        
+    </script>
+
+{% endblock %}
